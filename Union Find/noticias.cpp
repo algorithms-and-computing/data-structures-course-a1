@@ -1,3 +1,11 @@
+/* Problem Description
+ *
+ * This problem was taken from OmegaUp.
+ *
+ * Link to description:
+ *  https://omegaup.com/arena/problem/Noticias#problems
+ *
+ **/
 #include <bits/stdc++.h>
 
 using namespace std;
