@@ -32,19 +32,15 @@ Tree<T> * readTree() {
 }
 
 template <typename T>
-vector<T> postOrder(Tree<T> *node) {
+vector<T> inOrder(Tree<T> *node) {
   vector<T> result, right;
 
-  if(node->left) {
-    result = postOrder(node->left);
-  }
-
-  if(node->right) {
-    right = postOrder(node->right);
-    result.insert(result.begin() + result.size(), right.begin(), right.end());
-  }
-
+  if(node->left) result = inOrder(node->left);
   result.push_back(node->value);
+  if(node->right) {
+    right = inOrder(node->right);
+    result.insert(result.begin() + result.size() , right.begin(), right.end());
+  }
 
   return result;
 }
@@ -53,7 +49,7 @@ int main() {
   Tree<int> *root;
   root = readTree<int>();
 
-  vector<int> result = postOrder<int>(root);
+  vector<int> result = inOrder<int>(root);
 
   for (int i = 0; i < result.size(); ++i) {
     cout << result[i] << ' ';

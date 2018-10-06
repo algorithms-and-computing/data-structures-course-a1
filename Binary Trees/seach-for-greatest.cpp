@@ -31,33 +31,29 @@ Tree<T> * readTree() {
   return node;
 }
 
+// Only for int, float, char, struct/class with overload >
 template <typename T>
-vector<T> postOrder(Tree<T> *node) {
-  vector<T> result, right;
+T findGreatest(Tree<T> *node) {
+  T greatest=node->value, gleft, gright;
 
   if(node->left) {
-    result = postOrder(node->left);
+    gleft = findGreatest(node->left);
+    if(gleft > greatest) greatest = gleft;
   }
 
   if(node->right) {
-    right = postOrder(node->right);
-    result.insert(result.begin() + result.size(), right.begin(), right.end());
+    gright = findGreatest(node->right);
+    if(gright > greatest) greatest = gright; 
   }
 
-  result.push_back(node->value);
-
-  return result;
+  return greatest;
 }
 
 int main() {
-  Tree<int> *root;
-  root = readTree<int>();
+  Tree<char> *root;
+  root = readTree<char>();
 
-  vector<int> result = postOrder<int>(root);
-
-  for (int i = 0; i < result.size(); ++i) {
-    cout << result[i] << ' ';
-  }
+  cout << findGreatest<char>(root);
 
   return 0;
 }
